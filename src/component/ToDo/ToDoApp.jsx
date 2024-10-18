@@ -56,17 +56,17 @@ function LoginComponent(){
     // }
 
     
-    function ErrorMessageComponent(){
-        if(showErrorMessage){
-        return <div className="errorMessage">User Authentication Failed. Please check your credentials.</div>
-        }
-        return null
-    }
+    // function ErrorMessageComponent(){
+    //     if(showErrorMessage){
+    //     return <div className="errorMessage">User Authentication Failed. Please check your credentials.</div>
+    //     }
+    //     return null
+    // }
 
     return(
         <div className="Login">
             {showSuccessMessage && <div className="successMessage">User Authentication Successfull!!!</div>}
-           <ErrorMessageComponent/>
+            {showErrorMessage && <div className="errorMessage">User Authentication Failed. Please check your credentials.</div>}
             <div className="LoginForm">
                 <div>
                     <label>User Name</label>
