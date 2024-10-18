@@ -1,12 +1,19 @@
 import { useState } from 'react'
 import './ToDoApp.css'
+import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom'
 
 export default function ToDoApp(){
     return(
         <div className="ToDoApp">
-            <LoginComponent/>
-            {/* <WelcomeComponent/> */}
-            </div>
+            {/* Configuring browser router with Routes  */}
+            <BrowserRouter>
+                <Routes>
+                    <Route path='/' element={<LoginComponent/>}></Route>
+                    <Route path='/login' element={<LoginComponent/>}></Route>
+                    <Route path='/welcome' element={<WelcomeComponent/>}></Route>
+                </Routes>
+            </BrowserRouter>  
+        </div>
     )
 }
 
@@ -19,6 +26,7 @@ function LoginComponent(){
     const [showSuccessMessage, setShowSuccessMessage] = useState(false)
     const [showErrorMessage, setShowErrorMessage] = useState(false)
 
+    const navigate = useNavigate();
 
 
     function handleUserNameChange(event){
@@ -40,6 +48,7 @@ function LoginComponent(){
             console.log('Success')
             setShowSuccessMessage(true)
             setShowErrorMessage(false)
+            navigate('/welcome')
 
         }else{
             console.log('Failed')
@@ -65,6 +74,7 @@ function LoginComponent(){
 
     return(
         <div className="Login">
+            {/* Show <div>....</div> if condition one is true (showSuccessMessage)*/}
             {showSuccessMessage && <div className="successMessage">User Authentication Successfull!!!</div>}
             {showErrorMessage && <div className="errorMessage">User Authentication Failed. Please check your credentials.</div>}
             <div className="LoginForm">
@@ -81,16 +91,9 @@ function LoginComponent(){
                 <div>
                     <button type="button" name="Login" onClick={handleSubmit}>Login</button>
                 </div>
-
-
             </div>
-            
         </div>
     )
-
-
-    
-
 }
 
     function WelcomeComponent(){
