@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import './ToDoApp.css'
-import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom'
+import { BrowserRouter, Route, Routes, useNavigate, useParams } from 'react-router-dom'
 
 export default function ToDoApp(){
     return(
@@ -8,12 +8,14 @@ export default function ToDoApp(){
             {/* Configuring browser router with Routes 
             need to import that and also install 
             react-router-dom before starting this*/}
-            
+
             <BrowserRouter>
                 <Routes>
                     <Route path='/' element={<LoginComponent/>}></Route>
                     <Route path='/login' element={<LoginComponent/>}></Route>
-                    <Route path='/welcome' element={<WelcomeComponent/>}></Route>
+                    <Route path='/welcome/:userName' element={<WelcomeComponent/>}></Route>
+                    <Route path='*' element={<ErrorComponent/>}></Route>
+
                 </Routes>
             </BrowserRouter>  
         </div>
@@ -51,7 +53,7 @@ function LoginComponent(){
             console.log('Success')
             setShowSuccessMessage(true)
             setShowErrorMessage(false)
-            navigate('/welcome')
+            navigate(`/welcome/${userName}`)
 
         }else{
             console.log('Failed')
@@ -77,10 +79,12 @@ function LoginComponent(){
 
     return(
         <div className="Login">
+            
             {/* Show <div>....</div> if condition one is true (showSuccessMessage)*/}
             {showSuccessMessage && <div className="successMessage">User Authentication Successfull!!!</div>}
             {showErrorMessage && <div className="errorMessage">User Authentication Failed. Please check your credentials.</div>}
             <div className="LoginForm">
+                <h1>Time To Login.</h1>
                 <div>
                     <label>User Name</label>
                     <input type="text" name="userName" value={userName} onChange={handleUserNameChange}/>
@@ -100,10 +104,34 @@ function LoginComponent(){
 }
 
     function WelcomeComponent(){
+        // const params = useParams();
+        // console.log(params.userName)  or another method 
+
+        const {userName} = useParams();
+        console.log(userName)
         return(
-            <div className="Welcome">Welcome Component</div>
+            <div>
+                <h1>Welcome to ToDo Application</h1>
+                <div className="WelcomeComponent">Welcome {userName}</div>
+            </div>
         )
     }
+
+    function ErrorComponent(){
+        return(
+            <div className="ErrorComponent">
+                <h1>Page Not Found</h1>
+                <div>
+                    It seems the page you're looking for doesn't exist. Please check the URL or 
+                    <a href="/"> return to the homepage</a>.
+                </div>
+            </div>
+        )
+    }
+
+    
+    
+
 
 
 
