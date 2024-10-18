@@ -5,7 +5,10 @@ import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom'
 export default function ToDoApp(){
     return(
         <div className="ToDoApp">
-            {/* Configuring browser router with Routes  */}
+            {/* Configuring browser router with Routes 
+            need to import that and also install 
+            react-router-dom before starting this*/}
+            
             <BrowserRouter>
                 <Routes>
                     <Route path='/' element={<LoginComponent/>}></Route>
