@@ -183,10 +183,10 @@ function ListToDoComponent() {
     { id: 3, description: "Learn GC", done: false, targetDate: completionDate },
   ];
   return (
-    <div className="ListToDoComponent">
+    <div className="container">
       <h1>Things U Want To Do!</h1>
       <div>
-        <table>
+        <table className="table">
           <thead>
             <tr>
               <td>id</td>
