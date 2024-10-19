@@ -12,6 +12,8 @@ import {
 export default function ToDoApp() {
   return (
     <div className="ToDoApp">
+      <HeaderComponent />
+
       {/* Configuring browser router with Routes 
             need to import that and also install 
             react-router-dom before starting this*/}
@@ -26,8 +28,10 @@ export default function ToDoApp() {
           ></Route>
           <Route path="/todos" element={<ListToDoComponent />}></Route>
           <Route path="*" element={<ErrorComponent />}></Route>
+          <Route path="/logout" element={<LogoutComponent />}></Route>
         </Routes>
       </BrowserRouter>
+      <FooterComponent />
     </div>
   );
 }
@@ -156,15 +160,27 @@ function ErrorComponent() {
 }
 
 function ListToDoComponent() {
-
-
-    const todayDate = new Date();
-    const completionDate = new Date(todayDate.getFullYear()+12, todayDate.getMonth(), todayDate.getDay());
+  const todayDate = new Date();
+  const completionDate = new Date(
+    todayDate.getFullYear() + 12,
+    todayDate.getMonth(),
+    todayDate.getDay()
+  );
 
   const todos = [
-    { id: 1, description: "Learn AWS" , done:false, targetDate:completionDate},
-    { id: 2, description: "Learn Azure" , done:false, targetDate:completionDate},
-    { id: 3, description: "Learn GC" , done:false, targetDate:completionDate},
+    {
+      id: 1,
+      description: "Learn AWS",
+      done: false,
+      targetDate: completionDate,
+    },
+    {
+      id: 2,
+      description: "Learn Azure",
+      done: false,
+      targetDate: completionDate,
+    },
+    { id: 3, description: "Learn GC", done: false, targetDate: completionDate },
   ];
   return (
     <div className="ListToDoComponent">
@@ -192,6 +208,36 @@ function ListToDoComponent() {
           </tbody>
         </table>
       </div>
+    </div>
+  );
+}
+
+function HeaderComponent() {
+  return (
+    <div className="HeaderComponent">
+      <div>
+        Header
+        <hr />
+      </div>
+    </div>
+  );
+}
+
+function FooterComponent() {
+  return (
+    <div className="FooterComponent">
+      <div>
+        <hr /> Footer
+      </div>
+    </div>
+  );
+}
+
+function LogoutComponent() {
+  return (
+    <div className="LogoutComponent">
+      <h1>Logout Successfull!!!</h1>
+      <div>Thank You For Using Our Application!!!</div>
     </div>
   );
 }
