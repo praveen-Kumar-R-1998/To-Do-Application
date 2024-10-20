@@ -2,13 +2,26 @@ import "./ToDoApp.css";
 import LogoutComponent from "./LogoutComponent";
 import HeaderComponent from "./HeaderComponent";
 // import FooterComponent from "./FooterComponent";
-
 import ListToDoComponent from "./ListToDoComponent";
 import ErrorComponent from "./ErrorComponent";
 import WelcomeComponent from "./WelcomeComponent";
 import LoginComponent from "./LoginComponent";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import AuthProvider from "./Security/AuthContext.js"
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import AuthProvider, { useAuth } from "./Security/AuthContext.js";
+
+
+
+
+
+function AuthenticatedRoute({ children }) {
+  const authContext = useAuth();
+  if (authContext.isAuthenticated) {
+    return children;
+  }else{
+    return <Navigate to="/" />
+  }
+}
+
 export default function ToDoApp() {
   return (
     <div className="ToDoApp">
@@ -24,11 +37,19 @@ export default function ToDoApp() {
             <Route path="/login" element={<LoginComponent />}></Route>
             <Route
               path="/welcome/:userName"
-              element={<WelcomeComponent />}
+              element={
+                <AuthenticatedRoute>
+                  <WelcomeComponent />
+                </AuthenticatedRoute>
+              }
             ></Route>
-            <Route path="/todos" element={<ListToDoComponent />}></Route>
+            <Route path="/todos" element={
+              <AuthenticatedRoute>
+              <ListToDoComponent />
+              </AuthenticatedRoute>}>
+              </Route>
             <Route path="*" element={<ErrorComponent />}></Route>
-            <Route path="/logout" element={<LogoutComponent />}></Route>
+            <Route path="/logout" element={<AuthenticatedRoute><LogoutComponent /></AuthenticatedRoute>}></Route>
           </Routes>
           {/* <FooterComponent /> */}
         </BrowserRouter>
