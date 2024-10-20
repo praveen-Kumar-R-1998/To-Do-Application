@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-
 import { useAuth } from "./Security/AuthContext";
 
 function HeaderComponent() {
@@ -10,7 +9,7 @@ function HeaderComponent() {
   //   console.log(authContext)
 
   function logout (){
-    authContext.setAuthenticated(false)
+    authContext.logout()
   }
 
   return (
