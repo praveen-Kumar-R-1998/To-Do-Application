@@ -1,7 +1,7 @@
 import "./ToDoApp.css";
 import LogoutComponent from "./LogoutComponent";
 import HeaderComponent from "./HeaderComponent";
-import FooterComponent from "./FooterComponent";
+// import FooterComponent from "./FooterComponent";
 
 import ListToDoComponent from "./ListToDoComponent";
 import ErrorComponent from "./ErrorComponent";
@@ -30,7 +30,7 @@ export default function ToDoApp() {
             <Route path="*" element={<ErrorComponent />}></Route>
             <Route path="/logout" element={<LogoutComponent />}></Route>
           </Routes>
-          <FooterComponent />
+          {/* <FooterComponent /> */}
         </BrowserRouter>
       </AuthProvider>
     </div>
