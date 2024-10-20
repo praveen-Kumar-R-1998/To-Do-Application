@@ -5,7 +5,7 @@ function WelcomeComponent() {
     // console.log(params.userName)  or another method
   
     const { userName } = useParams();
-    console.log(userName);
+    // console.log(userName);
     return (
       <div>
         <h1>Welcome to ToDo Application</h1>
